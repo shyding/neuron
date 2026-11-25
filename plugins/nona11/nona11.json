@@ -1,0 +1,104 @@
+{
+	"tag_regex": [
+		{
+			"type": 1,
+			"regex": "^[0-9]+![0-9]+"
+		},
+		{
+			"type": 2,
+			"regex": "^[0-9]+![0-9]+"
+		},
+		{
+			"type": 3,
+			"regex": "^[0-9]+![0-9]+"
+		},
+		{
+			"type": 4,
+			"regex": "^[0-9]+![0-9]+"
+		},
+		{
+			"type": 5,
+			"regex": "^[0-9]+![0-9]+"
+		},
+		{
+			"type": 6,
+			"regex": "^[0-9]+![0-9]+"
+		},
+		{
+			"type": 9,
+			"regex": "^[0-9]+![0-9]+"
+		},
+		{
+			"type": 13,
+			"regex": "^([0-9]+!)+[0-9]+\\.[0-9]+$"
+		}
+	],
+	"group_interval": 5000,
+	"connection_mode": {
+		"name": "Connection Mode",
+		"name_zh": "连接模式",
+		"description": "Neuron as the client, or as the server",
+		"description_zh": "Neuron 作为客户端或服务端",
+		"attribute": "required",
+		"type": "map",
+		"default": 0,
+		"valid": {
+			"map": [
+				{
+					"key": "Client",
+					"value": 0
+				},
+				{
+					"key": "Server",
+					"value": 1
+				}
+			]
+		}
+	},
+	"host": {
+		"name": "IP Address",
+		"name_zh": "IP地址",
+		"description": "Local IP in server mode, remote device IP in client mode",
+		"description_zh": "服务端模式中填写本地 IP，客户端模式中填写目标设备 IP",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"port": {
+		"name": "Port",
+		"name_zh": "端口号",
+		"description": "Local port in server mode, remote device port in client mode",
+		"description_zh": "服务端模式中填写本地端口号，客户端模式中填写远程设备端口号",
+		"attribute": "required",
+		"type": "int",
+		"valid": {
+			"min": 1,
+			"max": 65535
+		}
+	},
+	"timeout": {
+		"name": "Connection Timeout (ms)",
+		"name_zh": "连接超时时间 (ms)",
+		"attribute": "required",
+		"type": "int",
+		"default": 5000,
+		"valid": {
+			"min": 1000,
+			"max": 65535
+		}
+	},
+	"interval": {
+		"name": "Send Interval (ms)",
+		"name_zh": "指令发送间隔 (ms)",
+		"attribute": "required",
+		"type": "int",
+		"default": 1000,
+		"valid": {
+			"min": 10,
+			"max": 30000
+		}
+	}
+}

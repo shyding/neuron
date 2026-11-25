@@ -1,0 +1,174 @@
+{
+    "tag_regex": [
+        {
+            "type": 1,
+            "regex": "^F[0-9]+$"
+        },
+        {
+            "type": 2,
+            "regex": "^F[0-9]+$"
+        },
+        {
+            "type": 3,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)$"
+        },
+        {
+            "type": 4,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)$"
+        },
+        {
+            "type": 5,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)+(#BB|#BL|#LL|#LB|)$"
+        },
+        {
+            "type": 6,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)+(#BB|#BL|#LL|#LB|)$"
+        },
+        {
+            "type": 7,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)+(#B|#L|)$"
+        },
+        {
+            "type": 8,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)+(#B|#L|)$"
+        },
+        {
+            "type": 9,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)+(#BB|#BL|#LL|#LB|)$"
+        },
+        {
+            "type": 10,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)+(#BB|#BL|#LL|#LB|)$"
+        },
+        {
+            "type": 11,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)\\.([0-9]|[0-5])$"
+        },
+        {
+            "type": 13,
+            "regex": "(^(CIO|A|W|H|D|P)[0-9]+|^EM[0-9]+W[0-9]+)\\.[0-9]+(H|L|)$"
+        }
+    ],
+    "group_interval": 100,
+    "type": {
+        "name": "Equipment Type",
+        "name_zh": "设备型号",
+        "type": "map",
+        "attribute": "required",
+        "default": 0,
+        "valid": {
+            "map": [
+                {
+                    "key": "Other",
+                    "value": 0
+                },
+                {
+                    "key": "CP",
+                    "value": 1
+                },
+                {
+                    "key": "CJ",
+                    "value": 2
+                },
+                {
+                    "key": "CS",
+                    "value": 3
+                },
+                {
+                    "key": "C",
+                    "value": 4
+                },
+                {
+                    "key": "NJ",
+                    "value": 5
+                },
+                {
+                    "key": "NX",
+                    "value": 6
+                },
+                {
+                    "key": "NY",
+                    "value": 7
+                }
+            ]
+        }
+    },
+    "host": {
+        "name": "Target PLC IP Address",
+        "name_zh": "目标设备 PLC IP 地址",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+            "length": 30
+        }
+    },
+    "port": {
+        "name": "Target PLC Port",
+        "name_zh": "目标设备 PLC 端口号",
+        "attribute": "required",
+        "type": "int",
+        "default": 9600,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    },
+    "expires": {
+        "name": "expires",
+        "name_zh": "过期时间",
+        "description": "Queue expiration time",
+        "description_zh": "队列过期时间",
+        "attribute": "required",
+        "type": "int",
+        "default": 500,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    },
+    "sliding_window": {
+        "name": "sliding window",
+        "name_zh": "飞行窗口",
+        "description": "Number of messages in transit in the queue",
+        "description_zh": "队列在途消息数",
+        "attribute": "required",
+        "type": "int",
+        "default": 1,
+        "valid": {
+            "min": 1,
+            "max": 100
+        }
+    },
+    "max_size": {
+        "name": "Maximum byte length of the packet",
+        "name_zh": "包最大字节长度",
+        "type": "map",
+        "attribute": "required",
+        "default": 64,
+        "valid": {
+            "map": [
+                {
+                    "key": "64",
+                    "value": 64
+                },
+                {
+                    "key": "128",
+                    "value": 128
+                },
+                {
+                    "key": "256",
+                    "value": 256
+                },
+                {
+                    "key": "512",
+                    "value": 512
+                },
+                {
+                    "key": "1024",
+                    "value": 1024
+                }
+            ]
+        }
+    }
+}

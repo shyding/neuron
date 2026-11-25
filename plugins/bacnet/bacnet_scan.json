@@ -1,0 +1,165 @@
+{
+	"bind_ip": {
+		"name": "Local Bind Address",
+		"name_zh": "本地绑定地址",
+		"description": "Local interface to bind. 0.0.0.0 binds every interface.",
+		"description_zh": "绑定的本地网卡地址，0.0.0.0 表示绑定所有网卡。",
+		"attribute": "optional",
+		"type": "string",
+		"default": "0.0.0.0",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"bind_port": {
+		"name": "Local Bind Port",
+		"name_zh": "本地绑定端口号",
+		"description": "Devices commonly broadcast their I-Am to 47808 instead of replying to the source port, so binding 47808 is required to see those replies.",
+		"description_zh": "设备通常将 I-Am 广播到 47808 端口而非回复至源端口，因此需绑定 47808 才能收到应答。",
+		"attribute": "optional",
+		"type": "int",
+		"default": 47808,
+		"valid": {
+			"min": 0,
+			"max": 65535
+		}
+	},
+	"device_scan_interval": {
+		"name": "Device Scan Interval",
+		"name_zh": "设备扫描周期",
+		"description": "How often to sweep the network for devices, in seconds.",
+		"description_zh": "定时扫描设备的周期（秒）。",
+		"attribute": "optional",
+		"type": "int",
+		"default": 600,
+		"valid": {
+			"min": 30,
+			"max": 86400
+		}
+	},
+	"point_scan_interval": {
+		"name": "Point Scan Interval",
+		"name_zh": "点位扫描周期",
+		"description": "How often to re-enumerate the points of every known device, in seconds. Far more expensive than a device sweep - one request per object - so normally the longer of the two.",
+		"description_zh": "定时扫描已发现设备点位的周期（秒）。点位扫描每个对象需一次请求，开销远大于设备扫描，通常设置得比设备扫描周期长。",
+		"attribute": "optional",
+		"type": "int",
+		"default": 1200,
+		"valid": {
+			"min": 60,
+			"max": 86400
+		}
+	},
+	"local_broadcast": {
+		"name": "Local Broadcast Scan",
+		"name_zh": "本地子网广播扫描",
+		"description": "Send Who-Is as an Original-Broadcast-NPDU. Reaches devices on the local IP subnet.",
+		"description_zh": "以 Original-Broadcast-NPDU 发送 Who-Is，可发现本地 IP 子网内的设备。",
+		"attribute": "optional",
+		"type": "map",
+		"default": 1,
+		"valid": {
+			"map": [
+				{
+					"key": "Disable",
+					"key_zh": "禁用",
+					"value": 0
+				},
+				{
+					"key": "Enable",
+					"key_zh": "启用",
+					"value": 1
+				}
+			]
+		}
+	},
+	"global_broadcast": {
+		"name": "Global Broadcast Scan",
+		"name_zh": "全局广播扫描",
+		"description": "Send Who-Is with DNET 0xFFFF so BACnet routers forward it. Reaches devices on MS/TP or other networks behind a router.",
+		"description_zh": "以 DNET 0xFFFF 发送 Who-Is，BACnet 路由器会向所有直连网络转发，可发现挂在 MS/TP 等网络后面的设备。",
+		"attribute": "optional",
+		"type": "map",
+		"default": 0,
+		"valid": {
+			"map": [
+				{
+					"key": "Disable",
+					"key_zh": "禁用",
+					"value": 0
+				},
+				{
+					"key": "Enable",
+					"key_zh": "启用",
+					"value": 1
+				}
+			]
+		}
+	},
+	"broadcast_ip": {
+		"name": "Broadcast Address",
+		"name_zh": "广播地址",
+		"description": "Destination of both broadcast modes. A subnet-directed address such as 192.168.1.255 is preferred over 255.255.255.255.",
+		"description_zh": "两种广播模式的目标地址，建议使用子网定向广播地址（如 192.168.1.255）而非 255.255.255.255。",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"bbmd_enable": {
+		"name": "Scan via BBMD",
+		"name_zh": "经 BBMD 扫描",
+		"description": "Register as a foreign device with a BBMD and send Who-Is as Distribute-Broadcast-To-Network. Reaches the other IP subnets that make up the same B/IP network.",
+		"description_zh": "向 BBMD 注册为外部设备，并以 Distribute-Broadcast-To-Network 发送 Who-Is，可发现同一 B/IP 网络中其他 IP 子网的设备。",
+		"attribute": "optional",
+		"type": "map",
+		"default": 0,
+		"valid": {
+			"map": [
+				{
+					"key": "Disable",
+					"key_zh": "禁用",
+					"value": 0
+				},
+				{
+					"key": "Enable",
+					"key_zh": "启用",
+					"value": 1
+				}
+			]
+		}
+	},
+	"bbmd_ip": {
+		"name": "BBMD IP Address",
+		"name_zh": "BBMD IP 地址",
+		"attribute": "optional",
+		"type": "string",
+		"default": "",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		},
+		"condition": {
+			"field": "bbmd_enable",
+			"value": 1
+		}
+	},
+	"bbmd_port": {
+		"name": "BBMD Port",
+		"name_zh": "BBMD 端口号",
+		"attribute": "optional",
+		"type": "int",
+		"default": 47808,
+		"valid": {
+			"min": 1,
+			"max": 65535
+		},
+		"condition": {
+			"field": "bbmd_enable",
+			"value": 1
+		}
+	}
+}

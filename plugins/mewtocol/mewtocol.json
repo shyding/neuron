@@ -1,0 +1,80 @@
+{
+	"tag_regex": [
+		{
+			"type": 3,
+			"regex": "^(X|Y|R|L|T|C|DT|LD|FL|IX|IY)[0-9]+$"
+		},
+		{
+			"type": 4,
+			"regex": "^(X|Y|R|L|T|C|DT|LD|FL|IX|IY)[0-9]+$"
+		},
+		{
+			"type": 5,
+			"regex": "^(X|Y|R|L|T|C|DT|LD|FL|IX|IY)[0-9]+$"
+		},
+		{
+			"type": 6,
+			"regex": "^(X|Y|R|L|T|C|DT|LD|FL|IX|IY)[0-9]+$"
+		},
+		{
+			"type": 9,
+			"regex": "^(X|Y|R|L|T|C|DT|LD|FL|IX|IY)[0-9]+$"
+		},
+		{
+			"type": 10,
+			"regex": "^(X|Y|R|L|T|C|DT|LD|FL|IX|IY)[0-9]+$"
+		},
+		{
+			"type": 11,
+			"regex": "^((X|Y|R|L)[0-9]+\\.[0-9]+|^(X|Y|R|L)[0-9]+)$"
+		},
+		{
+			"type": 13,
+			"regex": "^(X|Y|R|L|T|C|DT|LD|FL|IX|IY)[0-9]+\\.[0-9]+$"
+		}
+	],
+	"group_interval": 1000,
+	"host": {
+		"name": "Target PLC IP Address",
+		"name_zh": "目标设备 PLC IP 地址",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"port": {
+		"name": "Target PLC Port",
+		"name_zh": "目标设备端口号",
+		"description": "Target PLC port",
+		"type": "int",
+		"default": 2000,
+		"valid": {
+			"min": 1,
+			"max": 65535
+		}
+	},
+	"unit": {
+		"name": "PLC Unit No.",
+		"name_zh": "目标设备单元号",
+		"attribute": "required",
+		"type": "int",
+		"default": 1,
+		"valid": {
+			"min": 1,
+			"max": 255
+		}
+	},
+	"timeout": {
+		"name": "Read Timeout (ms)",
+		"name_zh": "读取超时时间 (ms)",
+		"attribute": "required",
+		"type": "int",
+		"default": 15000,
+		"valid": {
+			"min": 1000,
+			"max": 30000
+		}
+	}
+}

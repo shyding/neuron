@@ -1,0 +1,72 @@
+{
+	"tag_regex": [
+		{
+			"type": 3,
+			"regex": ""
+		},
+		{
+			"type": 4,
+			"regex": ""
+		},
+		{
+			"type": 5,
+			"regex": ""
+		},
+		{
+			"type": 6,
+			"regex": ""
+		},
+		{
+			"type": 9,
+			"regex": ""
+		},
+		{
+			"type": 11,
+			"regex": ""
+		}
+	],
+	"group_interval": 100,
+	"host": {
+		"name": "Target PLC IP Address",
+		"name_zh": "目标设备 PLC IP 地址",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"port": {
+		"name": "Target PLC Port",
+		"name_zh": "目标设备 PLC 端口号",
+		"attribute": "required",
+		"type": "int",
+		"default": 44818,
+		"valid": {
+			"min": 1,
+			"max": 65535
+		}
+	},
+	"cip_size": {
+		"name": "CIP Connection Size",
+		"name_zh": "CIP 连接大小",
+		"attribute": "required",
+		"type": "int",
+		"default": 500,
+		"valid": {
+			"min": 100,
+			"max": 1024
+		}
+	},
+	"logix_array_size": {
+		"name": "Logix Array Block Size",
+		"name_zh": "Logix 数组块大小",
+		"attribute": "required",
+		"type": "int",
+		"default": 120,
+		"valid": {
+			"min": 100,
+			"max": 200
+		}
+	}
+}

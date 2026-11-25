@@ -1,0 +1,136 @@
+{
+    "tag_regex": [
+        {"type": 1, "regex": ""},
+        {"type": 2, "regex": ""},
+        {"type": 3, "regex": ""},
+        {"type": 4, "regex": ""},
+        {"type": 5, "regex": ""},
+        {"type": 6, "regex": ""},
+        {"type": 7, "regex": ""},
+        {"type": 8, "regex": ""},
+        {"type": 9, "regex": ""},
+        {"type": 10, "regex": ""},
+        {"type": 11, "regex": ""},
+        {"type": 13, "regex": ""},
+        {"type": 14, "regex": ""}
+    ],
+    "group_interval": 1000,
+    "link": {
+        "name": "Physical Link",
+        "name_zh": "物理链路",
+        "description": "Serial or Ethernet",
+        "description_zh": "串口连接或以太网连接",
+        "attribute": "required",
+        "type": "map",
+        "default": 1,
+        "valid": {
+            "map": [
+                {"key": "Serial", "value": 0},
+                {"key": "Ethernet", "value": 1}
+            ]
+        }
+    },
+    "timeout": {
+        "name": "Connection Timeout (ms)",
+        "name_zh": "连接超时时间 (ms)",
+        "attribute": "required",
+        "type": "int",
+        "default": 3000,
+        "valid": {
+            "min": 1000,
+            "max": 30000
+        }
+    },
+    "device": {
+        "name": "Serial Device",
+        "name_zh": "串口设备",
+        "attribute": "required",
+        "type": "string",
+        "condition": {"field": "link", "value": 0},
+        "valid": {"length": 64}
+    },
+    "baud": {
+        "name": "Baud Rate",
+        "name_zh": "波特率",
+        "attribute": "required",
+        "type": "map",
+        "default": 4,
+        "condition": {"field": "link", "value": 0},
+        "valid": {
+            "map": [
+                {"key": "115200", "value": 0},
+                {"key": "57600", "value": 1},
+                {"key": "38400", "value": 2},
+                {"key": "19200", "value": 3},
+                {"key": "9600", "value": 4},
+                {"key": "4800", "value": 5}
+            ]
+        }
+    },
+    "data": {
+        "name": "Data Bits",
+        "name_zh": "数据位",
+        "attribute": "required",
+        "type": "map",
+        "default": 3,
+        "condition": {"field": "link", "value": 0},
+        "valid": {
+            "map": [
+                {"key": "7", "value": 2},
+                {"key": "8", "value": 3}
+            ]
+        }
+    },
+    "stop": {
+        "name": "Stop Bits",
+        "name_zh": "停止位",
+        "attribute": "required",
+        "type": "map",
+        "default": 0,
+        "condition": {"field": "link", "value": 0},
+        "valid": {
+            "map": [
+                {"key": "1", "value": 0},
+                {"key": "2", "value": 1}
+            ]
+        }
+    },
+    "parity": {
+        "name": "Parity",
+        "name_zh": "校验位",
+        "attribute": "required",
+        "type": "map",
+        "default": 0,
+        "condition": {"field": "link", "value": 0},
+        "valid": {
+            "map": [
+                {"key": "none", "value": 0},
+                {"key": "odd", "value": 1},
+                {"key": "even", "value": 2}
+            ]
+        }
+    },
+    "host": {
+        "name": "CNC IP Address",
+        "name_zh": "CNC IP地址",
+        "attribute": "required",
+        "type": "string",
+        "condition": {"field": "link", "value": 1},
+        "valid": {
+            "regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+            "length": 64
+        }
+    },
+    "port": {
+        "name": "CNC Port",
+        "name_zh": "CNC 端口",
+        "attribute": "required",
+        "type": "int",
+        "default": 10000,
+        "condition": {"field": "link", "value": 1},
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    }
+}

@@ -1,0 +1,228 @@
+{
+	"tag_regex": [
+		{
+			"type": 1,
+			"regex": "^[0-9]+![0-9]+$"
+		},
+		{
+			"type": 2,
+			"regex": "^[0-9]+![0-9]+$"
+		},
+		{
+			"type": 3,
+			"regex": "^[0-9]+![0-9]+$"
+		},
+		{
+			"type": 4,
+			"regex": "^[0-9]+![0-9]+$"
+		},
+		{
+			"type": 5,
+			"regex": "^[0-9]+![0-9]+$"
+		},
+		{
+			"type": 6,
+			"regex": "^[0-9]+![0-9]+$"
+		},
+		{
+			"type": 9,
+			"regex": "^[0-9]+![0-9]+$"
+		},
+		{
+			"type": 11,
+			"regex": "^[0-9]+![0-9]+$"
+		},
+		{
+			"type": 12,
+			"regex": "^[0-9]+![0-9]+$"
+		}
+	],
+	"group_interval": 1000,
+	"host": {
+		"name": "Device IP Address",
+		"name_zh": "设备 IP 地址",
+		"description": "Target device ip",
+		"description_zh": "目标设备 IP",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"port": {
+		"name": "Device Port",
+		"name_zh": "设备端口",
+		"description": "Target device port",
+		"description_zh": "目标设备端口号",
+		"attribute": "required",
+		"type": "int",
+		"default": 2404,
+		"valid": {
+			"min": 1,
+			"max": 65535
+		}
+	},
+	"cas": {
+		"name": "Common Addresses",
+		"name_zh": "公共地址列表",
+		"description": "Common addresses (ASDU addresses) of the stations behind this connection, a comma separated list of numbers and ranges, e.g. 1,2,5-8. The tag address is written as ca!ioa",
+		"description_zh": "该连接下所有站点的公共地址（ASDU 地址），以逗号分隔，支持区间，如 1,2,5-8。点位地址格式为 公共地址!信息体地址",
+		"attribute": "required",
+		"type": "string",
+		"default": "1",
+		"valid": {
+			"length": 256
+		}
+	},
+	"interval": {
+		"name": "Station Interrogation Interval",
+		"name_zh": "总召唤间隔",
+		"description": "The interval of sending station interrogation(s) to each station, unit second",
+		"description_zh": "向每个站点发送总召唤的间隔，单位为秒",
+		"attribute": "required",
+		"type": "int",
+		"default": 60,
+		"valid": {
+			"min": 1,
+			"max": 3600
+		}
+	},
+	"sync_time_interval": {
+		"name": "Sync Time Interval",
+		"name_zh": "时钟同步间隔",
+		"description": "The interval of sending sync time (C_CS_NA_1) to each station, 0 to disable",
+		"description_zh": "向每个站点发送时钟同步的间隔，单位为秒 (C_CS_NA_1)，0 表示关闭",
+		"attribute": "optional",
+		"type": "int",
+		"default": 0,
+		"valid": {
+			"min": 0,
+			"max": 3600
+		}
+	},
+	"remote_pulse_interval": {
+		"name": "Remote Pulse Interval",
+		"name_zh": "遥脉间隔",
+		"description": "The interval of sending remote pulse (C_CI_NA_1) to each station, 0 to disable",
+		"description_zh": "向每个站点发送遥脉的间隔，单位为秒 (C_CI_NA_1)，0 表示关闭",
+		"attribute": "optional",
+		"type": "int",
+		"default": 0,
+		"valid": {
+			"min": 0,
+			"max": 3600
+		}
+	},
+	"station_timeout": {
+		"name": "Station Timeout",
+		"name_zh": "站点超时",
+		"description": "Report the tags of a station as error when it sends nothing for this long, unit second, 0 to disable",
+		"description_zh": "某站点在该时间内没有上送任何数据时，将其点位置为错误，单位为秒，0 表示关闭",
+		"attribute": "optional",
+		"type": "int",
+		"default": 0,
+		"valid": {
+			"min": 0,
+			"max": 3600
+		}
+	},
+	"t0": {
+		"name": "T0",
+		"name_zh": "T0",
+		"description": "T0 timeout, the timeout of establishing TCP connection, unit second",
+		"description_zh": "T0 超时时间，建立 TCP 连接的超时时间，单位秒",
+		"attribute": "required",
+		"type": "int",
+		"default": 30,
+		"valid": {
+			"min": 1,
+			"max": 3600
+		}
+	},
+	"t1": {
+		"name": "T1",
+		"name_zh": "T1",
+		"description": "T1 timeout, the timeout of waiting for response, unit second",
+		"description_zh": "T1 超时时间，等待接收方响应请求的超时时间，单位秒",
+		"attribute": "required",
+		"type": "int",
+		"default": 15,
+		"valid": {
+			"min": 1,
+			"max": 3600
+		}
+	},
+	"t2": {
+		"name": "T2",
+		"name_zh": "T2",
+		"description": "If no I frame is received within T2 time, send S frame, unit second",
+		"description_zh": "如果 T2 时间内未接收到新的 I 帧报文，则发送 S 帧报文，单位秒",
+		"attribute": "required",
+		"type": "int",
+		"default": 10,
+		"valid": {
+			"min": 1,
+			"max": 3600
+		}
+	},
+	"t3": {
+		"name": "T3",
+		"name_zh": "T3",
+		"description": "If no I frame is received within T3 time, send test frame, unit second",
+		"description_zh": "如果 T3 时间内未接收到任何报文，则发送测试报文，单位秒",
+		"attribute": "required",
+		"type": "int",
+		"default": 20,
+		"valid": {
+			"min": 1,
+			"max": 3600
+		}
+	},
+	"w": {
+		"name": "W",
+		"name_zh": "W",
+		"description": "If W I frames are received, send S frame",
+		"description_zh": "如果接收到 W 个 I 帧，必定发送 S 帧",
+		"attribute": "required",
+		"type": "int",
+		"default": 8,
+		"valid": {
+			"min": 1,
+			"max": 128
+		}
+	},
+	"timeout": {
+		"name": "Timeout",
+		"name_zh": "超时",
+		"description": "The interval of resending the start frame, unit second",
+		"description_zh": "重发启动帧的间隔，单位为秒",
+		"attribute": "required",
+		"type": "int",
+		"default": 5,
+		"valid": {
+			"min": 1,
+			"max": 30
+		}
+	},
+	"active": {
+		"name": "Active",
+		"name_zh": "Active",
+		"description": "Active upload",
+		"description_zh": "设备主动上送数据时，是否开启及时推送",
+		"attribute": "required",
+		"type": "bool",
+		"default": true,
+		"valid": {}
+	},
+	"meta": {
+		"name": "META",
+		"name_zh": "META",
+		"description": "Enable upload meta data (quality and time)",
+		"description_zh": "是否上传元数据（品质位和时标）",
+		"attribute": "required",
+		"type": "bool",
+		"default": false,
+		"valid": {}
+	}
+}
