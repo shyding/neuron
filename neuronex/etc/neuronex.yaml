@@ -1,0 +1,40 @@
+server:
+  port: 8085
+  disableAuth: false
+  disableKuiper: false
+  # tls:
+  #   certFile: "etc/certs/neuronex.crt"
+  #   keyFile: "etc/certs/neuronex.key"
+#  admin:
+#    password: "0000"
+#  viewer:
+#    username: "test"
+#    password: "0000"
+
+neuron:
+  reverseProxies:
+    - location: /api/neuron
+      proxyPath: http://127.0.0.1:7001/api/v2
+
+ekuiper:
+  reverseProxies:
+    - location: /api/ekuiper
+      proxyPath: http://127.0.0.1:9081
+    - location: /api/sse/ekuiper
+      proxyPath: http://127.0.0.1:10081
+    - location: /ws/ekuiper
+      proxyPath: ws://127.0.0.1:10081
+monitor:
+  reverseProxies:
+    - location: /api/process
+      proxyPath: http://127.0.0.1:38085 
+
+
+log:
+  mode: file
+  level: error
+  file: log/neuronex/neuronex.log
+  maxSize: 20  # maximum size in megabytes of the log file before it gets rotated
+  maxBackups: 5 # MaxBackups is the maximum number of old log files to retain
+official:
+  url: https://neuronex-licenses.emqx.com
