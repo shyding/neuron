@@ -1,0 +1,249 @@
+{
+	"tag_regex": [
+		{
+			"type": 1,
+			"regex": "^[0-9]+$"
+		},
+		{
+			"type": 2,
+			"regex": "^[0-9]+$"
+		},
+		{
+			"type": 3,
+			"regex": "^[0-9]+(#B|#L|)$"
+		},
+		{
+			"type": 4,
+			"regex": "^[0-9]+(#B|#L|)$"
+		},
+		{
+			"type": 5,
+			"regex": "^[0-9]+(#BB|#BL|#LL|#LB|)$"
+		},
+		{
+			"type": 6,
+			"regex": "^[0-9]+(#BB|#BL|#LL|#LB|)$"
+		},
+		{
+			"type": 9,
+			"regex": "^[0-9]+(#BB|#BL|#LL|#LB|)$"
+		},
+		{
+			"type": 13,
+			"regex": "^[0-9]+\\.[0-9]+(H|L|)$"
+		}
+	],
+	"group_interval": 1000,
+	"timeout": {
+		"name": "Connection Timeout (ms)",
+		"name_zh": "连接超时时间 (ms)",
+		"attribute": "required",
+		"type": "int",
+		"default": 3000,
+		"valid": {
+			"min": 1000,
+			"max": 30000
+		}
+	},
+	"device": {
+		"name": "Serial Device",
+		"name_zh": "串口设备",
+		"description": "Serial device path",
+		"description_zh": "串口设备路径",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"length": 30
+		}
+	},
+	"stop": {
+		"name": "Stop Bits",
+		"name_zh": "停止位",
+		"attribute": "required",
+		"type": "map",
+		"default": 0,
+		"valid": {
+			"map": [
+				{
+					"key": "1",
+					"value": 0
+				},
+				{
+					"key": "2",
+					"value": 1
+				}
+			]
+		}
+	},
+	"parity": {
+		"name": "Parity",
+		"name_zh": "校验位",
+		"attribute": "required",
+		"type": "map",
+		"default": 2,
+		"valid": {
+			"map": [
+				{
+					"key": "none",
+					"value": 0
+				},
+				{
+					"key": "odd",
+					"value": 1
+				},
+				{
+					"key": "even",
+					"value": 2
+				},
+				{
+					"key": "mark",
+					"value": 3
+				},
+				{
+					"key": "space",
+					"value": 4
+				}
+			]
+		}
+	},
+	"baud": {
+		"name": "Baud Rate",
+		"name_zh": "波特率",
+		"attribute": "required",
+		"type": "map",
+		"default": 4,
+		"valid": {
+			"map": [
+				{
+					"key": "150",
+					"value": 12
+				},
+				{
+					"key": "200",
+					"value": 11
+				},
+				{
+					"key": "300",
+					"value": 10
+				},
+				{
+					"key": "600",
+					"value": 9
+				},
+				{
+					"key": "1200",
+					"value": 8
+				},
+				{
+					"key": "1800",
+					"value": 7
+				},
+				{
+					"key": "2400",
+					"value": 6
+				},
+				{
+					"key": "4800",
+					"value": 5
+				},
+				{
+					"key": "9600",
+					"value": 4
+				},
+				{
+					"key": "19200",
+					"value": 3
+				},
+				{
+					"key": "38400",
+					"value": 2
+				},
+				{
+					"key": "57600",
+					"value": 1
+				},
+				{
+					"key": "115200",
+					"value": 0
+				}
+			]
+		}
+	},
+	"data": {
+		"name": "Data Bits",
+		"name_zh": "数据位",
+		"attribute": "required",
+		"type": "map",
+		"default": 3,
+		"valid": {
+			"map": [
+				{
+					"key": "5",
+					"value": 0
+				},
+				{
+					"key": "6",
+					"value": 1
+				},
+				{
+					"key": "7",
+					"value": 2
+				},
+				{
+					"key": "8",
+					"value": 3
+				}
+			]
+		}
+	},
+	"sa": {
+		"name": "Master ID",
+		"name_zh": "主站地址",
+		"attribute": "required",
+		"type": "int",
+		"default": 4,
+		"valid": {
+			"min": 0,
+			"max": 100
+		}
+	},
+	"da": {
+		"name": "Slave ID",
+		"name_zh": "从站地址",
+		"attribute": "required",
+		"type": "int",
+		"default": 7,
+		"valid": {
+			"min": 0,
+			"max": 100
+		}
+	},
+	"device_id": {
+		"name": "Device ID",
+		"name_zh": "设备 ID",
+		"attribute": "required",
+		"type": "int",
+		"default": 8,
+		"valid": {
+			"min": 0,
+			"max": 9999
+		}
+	},
+	"cfg": {
+		"name": "Config Data",
+		"name_zh": "配置数据",
+		"attribute": "required",
+		"type": "string",
+		"default": "1F2F",
+		"valid": {
+			"length": 4
+		}
+	},
+	"value_out": {
+		"name": "Output Data",
+		"name_zh": "输出数据",
+		"attribute": "required",
+		"type": "string",
+		"default": "0000000000000000"
+	}
+}

@@ -1,0 +1,78 @@
+{
+    "tag_regex": [
+        {
+            "type": 1,
+            "regex": ""
+        },
+        {
+            "type": 2,
+            "regex": ""
+        },
+        {
+            "type": 3,
+            "regex": ""
+        },
+        {
+            "type": 4,
+            "regex": ""
+        },
+        {
+            "type": 5,
+            "regex": ""
+        },
+        {
+            "type": 6,
+            "regex": ""
+        },
+        {
+            "type": 7,
+            "regex": ""
+        },
+        {
+            "type": 8,
+            "regex": ""
+        },
+        {
+            "type": 9,
+            "regex": ""
+        },
+        {
+            "type": 10,
+            "regex": ""
+        },
+        {
+            "type": 11,
+            "regex": ""
+        },
+        {
+            "type": 13,
+            "regex": ""
+        },
+        {
+            "type": 34,
+            "regex": ""
+        }
+    ],
+    "group_interval": 1000,
+    "host": {
+        "name": "CNC IP Address",
+        "name_zh": "CNC IP 地址",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+            "length": 30
+        }
+    },
+    "port": {
+        "name": "CNC Port",
+        "name_zh": "CNC 端口",
+        "attribute": "required",
+        "type": "int",
+        "default": 8000,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    }
+}

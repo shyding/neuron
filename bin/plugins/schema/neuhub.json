@@ -1,0 +1,209 @@
+{
+    "tag_regex": [
+        {
+            "type": 1,
+            "regex": ""
+        },
+        {
+            "type": 2,
+            "regex": ""
+        },
+        {
+            "type": 3,
+            "regex": ""
+        },
+        {
+            "type": 4,
+            "regex": ""
+        },
+        {
+            "type": 5,
+            "regex": ""
+        },
+        {
+            "type": 6,
+            "regex": ""
+        },
+        {
+            "type": 7,
+            "regex": ""
+        },
+        {
+            "type": 8,
+            "regex": ""
+        },
+        {
+            "type": 9,
+            "regex": ""
+        },
+        {
+            "type": 10,
+            "regex": ""
+        },
+        {
+            "type": 11,
+            "regex": ""
+        },
+        {
+            "type": 12,
+            "regex": ""
+        },
+        {
+            "type": 13,
+            "regex": ""
+        },
+        {
+            "type": 22,
+            "regex": ""
+        },
+        {
+            "type": 23,
+            "regex": ""
+        },
+        {
+            "type": 24,
+            "regex": ""
+        },
+        {
+            "type": 25,
+            "regex": ""
+        },
+        {
+            "type": 26,
+            "regex": ""
+        },
+        {
+            "type": 27,
+            "regex": ""
+        },
+        {
+            "type": 28,
+            "regex": ""
+        },
+        {
+            "type": 29,
+            "regex": ""
+        },
+        {
+            "type": 30,
+            "regex": ""
+        },
+        {
+            "type": 31,
+            "regex": ""
+        },
+        {
+            "type": 32,
+            "regex": ""
+        },
+        {
+            "type": 33,
+            "regex": ""
+        },
+        {
+            "type": 34,
+            "regex": ""
+        }
+    ],
+    "group_interval": 2000,
+    "host": {
+        "name": "HUB IP Address",
+        "name_zh": "HUB IP 地址",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+            "length": 30
+        }
+    },
+    "port": {
+        "name": "HUB Port",
+        "name_zh": "HUB 端口",
+        "attribute": "required",
+        "type": "int",
+        "default": 17889,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    },
+    "type": {
+        "name": "Node Type",
+        "name_zh": "节点类型",
+        "attribute": "required",
+        "type": "map",
+        "default": 1,
+        "valid": {
+            "map": [
+                {
+                    "key": "OPC DA",
+                    "value": 1
+                },
+                {
+                    "key": "SYNTEC CNC",
+                    "value": 2
+                },
+                {
+                    "key": "MITSUBISHI CNC",
+                    "value": 3
+                },
+                {
+                    "key": "OPC AE",
+                    "value": 4
+                },
+                {
+                    "key": "GE Historian",
+                    "value": 5
+                }
+            ]
+        }
+    },
+    "node": {
+        "name": "Node Name",
+        "name_zh": "节点名",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "length": 255
+        }
+    },
+    "batch_size": {
+        "name": "Batch Size",
+        "name_zh": "批量大小",
+        "description": "Number of messages to be sent in one batch",
+        "description_zh": "一次发送的消息数量",
+        "attribute": "required",
+        "type": "int",
+        "default": 10,
+        "valid": {
+            "min": 1,
+            "max": 100
+        }
+    },
+    "expires": {
+        "name": "Expires",
+        "name_zh": "过期时间",
+        "description": "Queue expiration time",
+        "description_zh": "队列过期时间",
+        "attribute": "required",
+        "type": "int",
+        "default": 2000,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    },
+    "sliding_window": {
+        "name": "Sliding Window",
+        "name_zh": "飞行窗口",
+        "description": "Number of messages in transit in the queue",
+        "description_zh": "队列在途消息数",
+        "attribute": "required",
+        "type": "int",
+        "default": 1,
+        "valid": {
+            "min": 1,
+            "max": 100
+        }
+    }
+}

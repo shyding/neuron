@@ -1,0 +1,54 @@
+{
+    "tag_regex": [
+        {
+            "type": 3,
+            "regex": "^X[0-9A-F]+|^Y[0-9A-F]+|^R[0-9]+"
+        },
+        {
+            "type": 4,
+            "regex": "^X[0-9A-F]+|^Y[0-9A-F]+|^R[0-9]+"
+        },
+        {
+            "type": 5,
+            "regex": "^X[0-9A-F]+|^Y[0-9A-F]+|^R[0-9]+"
+        },
+        {
+            "type": 6,
+            "regex": "^X[0-9A-F]+|^Y[0-9A-F]+|^R[0-9]+"
+        },
+        {
+            "type": 10,
+            "regex": "FeedSpeedF[A|M|S|C|E]"
+        },
+        {
+            "type": 11,
+            "regex": "^X[0-9A-F]+|^Y[0-9A-F]+"
+        },
+        {
+            "type": 13,
+            "regex": "ProgramMain"
+        }
+    ],
+    "group_interval": 3000,
+    "host": {
+        "name": "CNC IP Address",
+        "name_zh": "CNC IP地址",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+            "length": 30
+        }
+    },
+    "port": {
+        "name": "CNC Port",
+        "name_zh": "CNC 端口",
+        "attribute": "required",
+        "type": "int",
+        "default": 683,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    }
+}

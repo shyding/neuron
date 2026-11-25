@@ -1,0 +1,74 @@
+{
+    "tag_regex": [
+        {
+            "type": 1,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 2,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 3,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 4,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 5,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 6,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 7,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 8,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 9,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 10,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+        },
+        {
+            "type": 11,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)\\.([0-9]|1[0-5])$"
+        },
+        {
+            "type": 13,
+            "regex": "(^(M|I|Q|PEPA|Z|T)[0-9]+|^DB[0-9]+.DBW[0-9]+)\\.[0-9]+$"
+        }
+    ],
+    "group_interval": 1000,
+    "host": {
+        "name": "Target PLC IP Address",
+        "name_zh": "目标设备 PLC IP 地址",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+            "length": 30
+        }
+    },
+    "port": {
+        "name": "Target PLC Port",
+        "name_zh": "目标设备 PLC 端口号",
+        "attribute": "required",
+        "type": "int",
+        "default": 102,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    }
+}

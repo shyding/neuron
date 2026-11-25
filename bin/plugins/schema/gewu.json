@@ -1,0 +1,114 @@
+{
+  "host": {
+    "name": "Gewu Platform MQTT URL",
+    "name_zh": "格物平台 MQTT 域名",
+    "attribute": "required",
+    "type": "string",
+    "default": "dmp-mqtt.cuiot.cn",
+    "valid": {
+      "length": 255
+    }
+  },
+  "port": {
+    "name": "Gewu Platform MQTT Port",
+    "name_zh": "格物平台 MQTT 端口",
+    "attribute": "required",
+    "type": "int",
+    "default": 1883,
+    "valid": {
+      "min": 1024,
+      "max": 65535
+    }
+  },
+  "product-key": {
+    "name": "Gateway Product Key",
+    "name_zh": "网关产品 Product Key",
+    "description": "雁飞·格物 DMP 平台的网关产品的 productKey, 用于 Neuron 上线",
+    "description_zh": "雁飞·格物 DMP 平台的网关产品的 productKey, 用于 Neuron 上线",
+    "attribute": "required",
+    "type": "string",
+    "valid": {
+      "regex": "/^[a-zA-Z0-9]+$/",
+      "length": 16
+    }
+  },
+  "device-key": {
+    "name": "Gateway Device Key",
+    "name_zh": "网关设备 Device Key",
+    "description": "雁飞·格物 DMP 平台的网关设备的 deviceKey, 用于 Neuron 上线",
+    "description_zh": "雁飞·格物 DMP 平台的网关设备的 deviceKey, 用于 Neuron 上线",
+    "attribute": "required",
+    "type": "string",
+    "valid": {
+      "regex": "/^[a-zA-Z0-9_]+$/",
+      "length": 32
+    }
+  },
+  "device-secret": {
+    "name": "Gateway Device Secret",
+    "name_zh": "网关设备 Device Secret",
+    "description": "雁飞·格物 DMP 平台的网关设备的 deviceSecret, 用于 Neuron 上线",
+    "description_zh": "雁飞·格物 DMP 平台的网关设备的 deviceSecret, 用于 Neuron 上线",
+    "attribute": "required",
+    "type": "string",
+    "valid": {
+      "regex": "/^[a-zA-Z0-9]+$/",
+      "length": 32
+    }
+  },
+  "device-id": {
+    "name": "Gateway Device ID",
+    "name_zh": "网关设备 Device ID",
+    "description": "网关设备的 deviceId, 用于 Neuron 上线。与 operator 字段搭配使用，若 operator 字段填写的为 “1”、“2”、“3”、“4” 时，请填写物联网卡的 ICCID，operator填写为“0”时，请填写设备的 SN 码或者 MAC 地址，10-32个字符以内，只支持数字，大小写字母及“-”",
+    "description_zh": "网关设备的 deviceId, 用于 Neuron 上线。与 operator 字段搭配使用，若 operator 字段填写的为 “1”、“2”、“3”、“4” 时，请填写物联网卡的 ICCID，operator填写为“0”时，请填写设备的 SN 码或者 MAC 地址，10-32个字符以内，只支持数字，大小写字母及“-”",
+    "attribute": "required",
+    "type": "string",
+    "valid": {
+      "regex": "/^[a-zA-Z0-9-]+$/",
+      "length": 32
+    }
+  },
+  "operator": {
+    "name": "Telecom Operator",
+    "name_zh": "通信运营商",
+    "description": "表示运营商标识符，当设备使用物联网卡时，该标识符请填写“1”（联通），“2”（移动），“3”（电信），“4”（广电），若未使用蜂窝网络接入，请填写“0”",
+    "description_zh": "表示运营商标识符，当设备使用物联网卡时，该标识符请填写“1”（联通），“2”（移动），“3”（电信），“4”（广电），若未使用蜂窝网络接入，请填写“0”",
+    "attribute": "required",
+    "type": "map",
+    "default": 0,
+    "valid": {
+      "map": [
+        {
+          "key": "未使用蜂窝网络",
+          "value": 0
+        },
+        {
+          "key": "联通",
+          "value": 1
+        },
+        {
+          "key": "移动",
+          "value": 2
+        },
+        {
+          "key": "电信",
+          "value": 3
+        },
+        {
+          "key": "广电",
+          "value": 4
+        }
+      ]
+    }
+  },
+  "ssl": {
+    "name": "SSL",
+    "name_zh": "SSL",
+    "description": "Enable SSL connection",
+    "description_zh": "是否启用 SSL 连接",
+    "attribute": "optional",
+    "type": "bool",
+    "default": false,
+    "valid": {}
+  }
+}

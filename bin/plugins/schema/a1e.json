@@ -1,0 +1,105 @@
+{
+	"tag_regex": [
+		{
+			"type": 3,
+			"regex": "^(TN|STN|SN|CN|D|SD|W|SW|R|ZR|Z)[0-9]+$"
+		},
+		{
+			"type": 4,
+			"regex": "^(TN|STN|SN|CN|D|SD|W|SW|R|ZR|Z)[0-9]+$"
+		},
+		{
+			"type": 5,
+			"regex": "^(TN|STN|SN|CN|D|SD|W|SW|R|ZR|Z)[0-9]+$"
+		},
+		{
+			"type": 6,
+			"regex": "^(TN|STN|SN|CN|D|SD|W|SW|R|ZR|Z)[0-9]+$"
+		},
+		{
+			"type": 9,
+			"regex": "^(TN|STN|SN|CN|D|SD|W|SW|R|ZR|Z)[0-9]+$"
+		},
+		{
+			"type": 10,
+			"regex": "^(TN|STN|SN|CN|D|SD|W|SW|R|ZR|Z)[0-9]+$"
+		},
+		{
+			"type": 11,
+			"regex": "^((TN|STN|SN|CN|D|SD|W|SW|R|ZR|Z)[0-9]+\\.[0-9]+|^(X|DX|Y|DY|B|SB|M|SM|L|F|V|S|TS|TC|SS|STS|SC|CS|CC)[0-9]+)$"
+		},
+		{
+			"type": 13,
+			"regex": "^(TN|STN|SN|CN|D|SD|W|SW|R|ZR|Z)[0-9]+\\.[0-9]+(H|L|)$"
+		}
+	],
+	"group_interval": 1000,
+	"transport_mode": {
+		"name": "Transport Mode",
+		"name_zh": "传输模式",
+		"description": "TCP transfer or UDP transfer",
+		"description_zh": "TCP 传输或 UDP 传输",
+		"attribute": "required",
+		"type": "map",
+		"default": 0,
+		"valid": {
+			"map": [
+				{
+					"key": "TCP",
+					"value": 0
+				},
+				{
+					"key": "UDP",
+					"value": 1
+				}
+			]
+		}
+	},
+	"host": {
+		"name": "Target PLC IP Address",
+		"name_zh": "目标设备 PLC IP 地址",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"port": {
+		"name": "Target PLC Port",
+		"name_zh": "目标设备 PLC 端口号",
+		"attribute": "required",
+		"type": "int",
+		"default": 2000,
+		"valid": {
+			"min": 1,
+			"max": 65535
+		}
+	},
+	"src-port": {
+		"name": "UDP Source Port",
+		"name_zh": "UDP 源端口号",
+		"attribute": "optional",
+		"type": "int",
+		"default": 52001,
+		"valid": {
+			"min": 0,
+			"max": 65535
+		},
+		"condition": {
+			"field": "transport_mode",
+			"value": 1
+		}
+	},
+	"timeout": {
+		"name": "Respons Timeout(ms)",
+		"name_zh": "PLC 响应超时 (ms)",
+		"attribute": "optional",
+		"type": "int",
+		"default": 15000,
+		"valid": {
+			"min": 0,
+			"max": 60000
+		}
+	}
+}

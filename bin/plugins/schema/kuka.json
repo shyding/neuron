@@ -1,0 +1,99 @@
+{
+    "tag_regex": [
+        {
+            "type": 1,
+            "regex": ""
+        },
+        {
+            "type": 2,
+            "regex": ""
+        },
+        {
+            "type": 3,
+            "regex": ""
+        },
+        {
+            "type": 4,
+            "regex": ""
+        },
+        {
+            "type": 5,
+            "regex": ""
+        },
+        {
+            "type": 6,
+            "regex": ""
+        },
+        {
+            "type": 7,
+            "regex": ""
+        },
+        {
+            "type": 8,
+            "regex": ""
+        },
+        {
+            "type": 9,
+            "regex": ""
+        },
+        {
+            "type": 10,
+            "regex": ""
+        },
+        {
+            "type": 12,
+            "regex": ""
+        },
+        {
+            "type": 13,
+            "regex": ""
+        }
+    ],
+    "group_interval": 1000,
+    "host": {
+        "name": "IP Address",
+        "name_zh": "IP 地址",
+        "description": "Target Device IPv4 address or bind address",
+        "description_zh": "目标设备 IPv4 地址或绑定地址",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+            "length": 30
+        }
+    },
+    "port": {
+        "name": "Port",
+        "name_zh": "端口",
+        "description": "Target Device port or bind port",
+        "description_zh": "目标设备端口或绑定端口",
+        "attribute": "required",
+        "type": "int",
+        "default": 54601,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    },
+    "connection_mode": {
+        "name": "Connection Mode",
+        "name_zh": "连接模式",
+        "description": "Neuron as the client, or as the server",
+        "description_zh": "Neuron 作为客户端或服务端",
+        "attribute": "required",
+        "type": "map",
+        "default": 1,
+        "valid": {
+            "map": [
+                {
+                    "key": "Client",
+                    "value": 0
+                },
+                {
+                    "key": "Server",
+                    "value": 1
+                }
+            ]
+        }
+    }
+}

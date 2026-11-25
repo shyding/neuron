@@ -1,0 +1,239 @@
+{
+	"tag_regex": [
+		{
+			"type": 1,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 2,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 3,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 4,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 5,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 6,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 7,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 8,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 9,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 10,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 11,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 12,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 13,
+			"regex": "^[0-9]+(\\[\\d{1,3}(,\\d{1,3}){0,2}\\])?!*"
+		},
+		{
+			"type": 21,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 22,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 23,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 24,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 25,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 26,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 27,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 28,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 29,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 30,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 31,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 32,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 33,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 34,
+			"regex": "^[0-9]+!*"
+		},
+		{
+			"type": 40,
+			"regex": "^cond:|alarm:|event:|method:[0-9]+!*"
+		}
+	],
+	"group_interval": 100,
+	"url": {
+		"name": "Endpoint URL",
+		"name_zh": "端点 URL",
+		"description": "OPCUA server endpoint url",
+		"description_zh": "OPCUA 服务器端点 URL",
+		"attribute": "required",
+		"type": "string",
+		"default": "opc.tcp://127.0.0.1:4840/",
+		"valid": {
+			"regex": "/^opc\\.tcp:\\/\\/\\S+:\\d+(\\/[\\w\\-._~:\/?#\\[\\]@!$&'()*+,;=]*)?$/",
+			"length": 256
+		}
+	},
+	"username": {
+		"name": "Username",
+		"name_zh": "用户名",
+		"attribute": "optional",
+		"type": "string",
+		"default": "",
+		"valid": {
+			"length": 30
+		}
+	},
+	"password": {
+		"name": "Password",
+		"name_zh": "密码",
+		"attribute": "optional",
+		"type": "string",
+		"default": "",
+		"valid": {
+			"length": 30
+		}
+	},
+	"cert": {
+		"name": "Certificate file",
+		"name_zh": "证书文件",
+		"attribute": "optional",
+		"type": "file",
+		"default": "",
+		"valid": {
+			"length": 81960
+		}
+	},
+	"key": {
+		"name": "Key file",
+		"name_zh": "密钥文件",
+		"attribute": "optional",
+		"type": "file",
+		"default": "",
+		"valid": {
+			"length": 81960
+		}
+	},
+	"security_mode": {
+		"name": "Security Mode",
+		"name_zh": "安全策略",
+		"attribute": "optional",
+		"type": "map",
+		"default": 1,
+		"valid": {
+			"map": [
+				{
+					"key": "None",
+					"value": 1
+				},
+				{
+					"key": "Sign",
+					"value": 2
+				},
+				{
+					"key": "Sign & Encrypt",
+					"value": 3
+				}
+			]
+		}
+	},
+	"update_mode": {
+		"name": "Update Mode",
+		"name_zh": "更新模式",
+		"attribute": "optional",
+		"type": "map",
+		"default": 1,
+		"valid": {
+			"map": [
+				{
+					"key": "Read",
+					"value": 1
+				},
+				{
+					"key": "Subscribe",
+					"value": 2
+				},
+				{
+					"key": "Read & Subscribe",
+					"value": 3
+				}
+			]
+		}
+	},
+	"publish-interval": {
+		"name": "Publish Interval (ms)",
+		"name_zh": "发布间隔 (ms)",
+		"attribute": "optional",
+		"type": "int",
+		"default": 500,
+		"valid": {
+			"min": 100,
+			"max": 65535
+		}
+	},
+	"event-root-node": {
+		"name": "Event Root Node",
+		"name_zh": "事件根节点",
+		"description": "OPC UA event root node for condition subscription (default: 0!2253 for Server node)",
+		"description_zh": "条件订阅的OPC UA事件根节点（默认：0!2253表示Server节点）",
+		"attribute": "optional",
+		"type": "string",
+		"default": "0!2253",
+		"valid": {
+			"length": 256
+		}
+	}
+}

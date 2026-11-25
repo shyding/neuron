@@ -1,0 +1,246 @@
+{
+	"tag_regex": [
+		{
+			"type": 1,
+			"regex": ""
+		},
+		{
+			"type": 2,
+			"regex": ""
+		},
+		{
+			"type": 3,
+			"regex": ""
+		},
+		{
+			"type": 4,
+			"regex": ""
+		},
+		{
+			"type": 5,
+			"regex": ""
+		},
+		{
+			"type": 6,
+			"regex": ""
+		},
+		{
+			"type": 7,
+			"regex": ""
+		},
+		{
+			"type": 8,
+			"regex": ""
+		},
+		{
+			"type": 9,
+			"regex": ""
+		},
+		{
+			"type": 10,
+			"regex": ""
+		},
+		{
+			"type": 11,
+			"regex": ""
+		}
+	],
+	"group_interval": 100,
+	"device": {
+		"name": "Target IO Device Name",
+		"name_zh": "目标 IO 设备名称",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"length": 127
+		}
+	},
+	"interface": {
+		"name": "Local Interface Name",
+		"name_zh": "本地网口名称",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"length": 15
+		}
+	},
+	"host": {
+		"name": "Target IO Device IP Address",
+		"name_zh": "目标 IO 设备 IP 地址",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"port": {
+		"name": "Target IO Device Port",
+		"name_zh": "目标 IO 设备端口",
+		"attribute": "required",
+		"type": "int",
+		"default": 34964,
+		"valid": {
+			"min": 1,
+			"max": 65535
+		}
+	},
+	"apis": {
+		"name": "API List",
+		"name_zh": "API列表",
+		"description": "Profinet IO Device API List",
+		"description_zh": "Profinet IO设备 API列表",
+		"attribute": "required",
+		"type": "array",
+		"fields": {
+			"api": {
+				"name": "API",
+				"name_zh": "API",
+				"description": "Profinet IO Device API",
+				"description_zh": "Profinet IO设备 API",
+				"attribute": "required",
+				"type": "int",
+				"valid": {
+					"min": 0
+				}
+			},
+			"slot": {
+				"name": "Slot",
+				"name_zh": "槽位",
+				"description": "Profinet IO Device Slot",
+				"description_zh": "Profinet IO设备 槽位",
+				"attribute": "required",
+				"type": "int",
+				"valid": {
+					"min": 0
+				}
+			},
+			"ident": {
+				"name": "Ident",
+				"name_zh": "标识",
+				"description": "Profinet IO Device Ident",
+				"description_zh": "Profinet IO设备 标识",
+				"attribute": "required",
+				"type": "int",
+				"default": 0,
+				"valid": {
+					"min": 0
+				}
+			},
+			"sub_slot": {
+				"name": "Sub Slot",
+				"name_zh": "子槽位",
+				"description": "Profinet IO Device Sub Slot",
+				"description_zh": "Profinet IO设备 子槽位",
+				"attribute": "required",
+				"type": "int",
+				"valid": {
+					"min": 0
+				}
+			},
+			"sub_ident": {
+				"name": "Sub Ident",
+				"name_zh": "子标识",
+				"description": "Profinet IO Device Sub Ident",
+				"description_zh": "Profinet IO设备 子标识",
+				"attribute": "required",
+				"type": "int",
+				"default": 0,
+				"valid": {
+					"min": 0
+				}
+			},
+			"properties": {
+				"name": "Properties",
+				"name_zh": "属性",
+				"description": "Profinet IO Device Properties",
+				"description_zh": "Profinet IO设备 属性",
+				"attribute": "required",
+				"type": "map",
+				"default": 0,
+				"valid": {
+					"map": [
+						{
+							"key": "None",
+							"value": 0
+						},
+						{
+							"key": "Input data",
+							"value": 1
+						},
+						{
+							"key": "Output data",
+							"value": 2
+						},
+						{
+							"key": "Input and Output data",
+							"value": 3
+						}
+					]
+				}
+			},
+			"input_data_length": {
+				"name": "Input Data Length",
+				"name_zh": "输入数据长度",
+				"description": "Profinet IO Device Input Data Length",
+				"description_zh": "Profinet IO设备 输入数据长度",
+				"attribute": "required",
+				"type": "int",
+				"default": 0,
+				"condition": {
+					"field": "properties",
+					"values": [
+						1,
+						3
+					]
+				},
+				"valid": {
+					"min": 0
+				}
+			},
+			"output_data_length": {
+				"name": "Output Data Length",
+				"name_zh": "输出数据长度",
+				"description": "Profinet IO Device Output Data Length",
+				"description_zh": "Profinet IO设备 输出数据长度",
+				"attribute": "required",
+				"type": "int",
+				"default": 0,
+				"condition": {
+					"field": "properties",
+					"values": [
+						2,
+						3
+					]
+				},
+				"valid": {
+					"min": 0
+				}
+			}
+		},
+		"default": [
+			{
+				"api": 0,
+				"slot": 0,
+				"sub_slot": 1,
+				"properties": 0
+			},
+			{
+				"api": 0,
+				"slot": 0,
+				"sub_slot": 32768,
+				"properties": 0
+			},
+			{
+				"api": 0,
+				"slot": 0,
+				"sub_slot": 32769,
+				"properties": 0
+			}
+		],
+		"valid": {
+			"min_length": 1,
+			"max_length": 16
+		}
+	}
+}

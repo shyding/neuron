@@ -1,0 +1,180 @@
+{
+    "tag_regex": [
+        {
+            "type": 3,
+            "regex": "^(U|B|T|C|R|N)[0-9]+:[0-9]+(#B|#L|)(\\.PRE|\\.ACC)?$"
+        },
+        {
+            "type": 4,
+            "regex": "^(U|B|T|C|R|N)[0-9]+:[0-9]+(#B|#L|)(\\.PRE|\\.ACC)?$"
+        },
+        {
+            "type": 5,
+            "regex": "^(U|B|T|C|R|N)[0-9]+:[0-9]+(#BB|#BL|#LL|#LB|)$"
+        },
+        {
+            "type": 6,
+            "regex": "^(U|B|T|C|R|N)[0-9]+:[0-9]+(#BB|#BL|#LL|#LB|)$"
+        },
+		{
+			"type": 9,
+			"regex": "^(F)[0-9]+:[0-9]+(#BB|#BL|#LL|#LB|)$"
+		},
+        {
+            "type": 11,
+            "regex": "^(U|B|T|C|R|N)[0-9]+:[0-9]+.([0-9]|[1][0-5])$"
+        },
+		{
+			"type": 13,
+			"regex": "^(A[0-9]+:[0-9]+\\.[0-9]+(H|L|)|S[0-9]+:[0-9]+(H|L|))$"
+		}
+    ],
+    "group_interval": 1000,
+    "timeout": {
+        "name": "Connection Timeout (ms)",
+        "name_zh": "连接超时时间 (ms)",
+        "attribute": "required",
+        "type": "int",
+        "default": 3000,
+        "valid": {
+            "min": 1000,
+            "max": 65535
+        }
+    },
+    "interval": {
+        "name": "Send Interval (s)",
+        "name_zh": "指令发送间隔 (s)",
+        "attribute": "required",
+        "type": "int",
+        "default": 30,
+        "valid": {
+            "min": 10,
+            "max": 1000
+        }
+    },
+    "device": {
+        "name": "Serial Device",
+        "name_zh": "串口设备",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "length": 30
+        }
+    },
+    "stop": {
+        "name": "Stop Bits",
+        "name_zh": "停止位",
+        "attribute": "required",
+        "type": "map",
+        "default": 0,
+        "valid": {
+            "map": [
+                {
+                    "key": "1",
+                    "value": 0
+                },
+                {
+                    "key": "2",
+                    "value": 1
+                }
+            ]
+        }
+    },
+    "parity": {
+        "name": "Parity",
+        "name_zh": "校验位",
+        "attribute": "required",
+        "type": "map",
+        "default": 2,
+        "valid": {
+            "map": [
+                {
+                    "key": "None",
+                    "value": 0
+                },
+                {
+                    "key": "Odd",
+                    "value": 1
+                },
+                {
+                    "key": "Even",
+                    "value": 2
+                },
+                {
+                    "key": "Mark",
+                    "value": 3
+                },
+                {
+                    "key": "Space",
+                    "value": 4
+                }
+            ]
+        }
+    },
+    "baud": {
+        "name": "Baud Rate",
+        "name_zh": "波特率",
+        "attribute": "required",
+        "type": "map",
+        "default": 4,
+        "valid": {
+            "map": [
+                {
+                    "key": "2400",
+                    "value": 6
+                },
+                {
+                    "key": "4800",
+                    "value": 5
+                },
+                {
+                    "key": "9600",
+                    "value": 4
+                },
+                {
+                    "key": "19200",
+                    "value": 3
+                },
+                {
+                    "key": "38400",
+                    "value": 2
+                },
+                {
+                    "key": "57600",
+                    "value": 1
+                },
+                {
+                    "key": "115200",
+                    "value": 0
+                }
+            ]
+        }
+    },
+    "data": {
+        "name": "Data Bits",
+        "name_zh": "数据位",
+        "attribute": "required",
+        "type": "map",
+        "default": 3,
+        "valid": {
+            "map": [
+                {
+                    "key": "5",
+                    "value": 0
+                },
+                {
+                    "key": "6",
+                    "value": 1
+                },
+                {
+                    "key": "7",
+                    "value": 2
+                },
+                {
+                    "key": "8",
+                    "value": 3
+                }
+            ]
+        }
+    }
+}

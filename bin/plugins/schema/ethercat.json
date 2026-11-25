@@ -1,0 +1,18 @@
+{
+    "tag_regex": [
+        {
+            "type": 11,
+            "regex": "0x[0-9]+\\.[0-7]$"
+        }
+    ],
+    "group_interval": 1000,
+    "interface": {
+        "name": "Local Interface Name",
+        "name_zh": "本地网口名称",
+        "attribute": "required",
+        "type": "string",
+        "valid": {
+            "length": 64
+        }
+    }
+}

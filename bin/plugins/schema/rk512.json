@@ -1,0 +1,184 @@
+{
+	"tag_regex": [
+        {
+			"type": 1,
+			"regex": "(^DB[0-9]+.DB(W|B)[0-9]+)$"
+		},
+		{
+			"type": 2,
+			"regex": "(^DB[0-9]+.DB(W|B)[0-9]+)$"
+		},
+		{
+			"type": 3,
+			"regex": "(^(I|O|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 4,
+			"regex": "(^(I|O|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 5,
+			"regex": "(^(I|O|T|C)[0-9]+|^DB[0-9]+.DB(W|D)[0-9]+)$"
+		},
+		{
+			"type": 6,
+			"regex": "(^(I|O|T|C)[0-9]+|^DB[0-9]+.DB(W|D)[0-9]+)$"
+		},
+		{
+			"type": 9,
+			"regex": "(^(I|O|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 10,
+			"regex": "(^(I|O|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 11,
+			"regex": "(^(I|O)[0-9]+|^DB[0-9]+.DB(W|X)[0-9]+)\\.([0-7])$"
+		},
+		{
+			"type": 13,
+			"regex": "^DB[0-9]+.DBW[0-9]+)\\.[0-9]+$"
+		}
+	],
+	"group_interval": 1000,
+	"timeout": {
+		"name": "Recv Timeout (ms)",
+		"name_zh": "接收超时时间 (ms)",
+		"attribute": "required",
+		"type": "int",
+		"default": 3000,
+		"valid": {
+			"min": 1000,
+			"max": 30000
+		}
+	},
+	"interval": {
+		"name": "Send Interval (ms)",
+		"name_zh": "指令发送间隔 (ms)",
+		"attribute": "required",
+		"type": "int",
+		"default": 20,
+		"valid": {
+			"min": 0,
+			"max": 3000
+		}
+	},
+	"device": {
+		"name": "Serial Port",
+		"name_zh": "串口设备",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"length": 30
+		}
+	},
+	"stop": {
+		"name": "Stop Bits",
+		"name_zh": "停止位",
+		"attribute": "required",
+		"type": "map",
+		"default": 0,
+		"valid": {
+			"map": [
+				{
+					"key": "1",
+					"value": 0
+				},
+				{
+					"key": "2",
+					"value": 1
+				}
+			]
+		}
+	},
+	"parity": {
+		"name": "Parity",
+		"name_zh": "校验位",
+		"attribute": "required",
+		"type": "map",
+		"default": 0,
+		"valid": {
+			"map": [
+				{
+					"key": "none",
+					"value": 0
+				},
+				{
+					"key": "odd",
+					"value": 1
+				},
+				{
+					"key": "even",
+					"value": 2
+				},
+				{
+					"key": "mark",
+					"value": 3
+				},
+				{
+					"key": "space",
+					"value": 4
+				}
+			]
+		}
+	},
+	"baud": {
+		"name": "Baud Rate",
+		"name_zh": "波特率",
+		"attribute": "required",
+		"type": "map",
+		"default": 4,
+		"valid": {
+			"map": [
+				{
+					"key": "9600",
+					"value": 4
+				},
+				{
+					"key": "19200",
+					"value": 3
+				},
+				{
+					"key": "38400",
+					"value": 2
+				},
+				{
+					"key": "57600",
+					"value": 1
+				},
+				{
+					"key": "115200",
+					"value": 0
+				}
+			]
+		}
+	},
+	"data": {
+		"name": "Data Size",
+		"name_zh": "数据位",
+		"attribute": "required",
+		"type": "map",
+		"default": 3,
+		"valid": {
+			"map": [
+				{
+					"key": "5",
+					"value": 0
+				},
+				{
+					"key": "6",
+					"value": 1
+				},
+				{
+					"key": "7",
+					"value": 2
+				},
+				{
+					"key": "8",
+					"value": 3
+				}
+			]
+		}
+	}
+}

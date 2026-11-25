@@ -1,0 +1,92 @@
+{
+	"tag_regex": [
+		{
+			"type": 1,
+			"regex": "\\w+\\.UTC_Offset$"
+		},
+		{
+			"type": 2,
+			"regex": "^(MSI|MSO|MSV|ACC)[0-9]+$|\\w+\\.Update_Interval$|\\w+\\.Time_Delay$|\\w+\\.Notification_Class$|\\w+\\.Units$|\\w+\\.Event_State$|\\w+\\.Reliability$|\\w+\\.Object_Type$|\\w+\\.Polarity$|\\w+\\.custom.[0-9]+$|\\w+\\.System_Status$|\\w+\\.Protocol_Version$|\\w+\\.Protocol_Conformance_Class$|\\w+\\.Segmentation_Supported$|\\w+\\.APUD_Segment_Timeout$|\\w+\\.Number_Of_APDU_Retries$|\\w+\\.Max_Master$|\\w+\\.Max_Info_Frame$|\\w+\\.Pulse_Rate$|\\w+\\.Value_Before_Change$|\\w+\\.Notify_Type$"
+		},
+		{
+			"type": 4,
+			"regex": "\\w+\\.Vendor_Identifier$|\\w+\\.Max_APDU_Length_Accepted$|\\w+\\.APUD_Timeout$"
+		},
+		{
+			"type": 5,
+			"regex": "^(IV)[0-9]+$|\\w+\\.custom.[0-9]+$"
+		},
+		{
+			"type": 6,
+			"regex": "^(ACC|PIV)[0-9]+$|\\w+\\.custom.[0-9]+$"
+		},
+		{
+			"type": 9,
+			"regex": "^(AI|AO|AV|LO)[0-9]+$|^AO[0-9]+\\.NULL$|\\w+\\.Min_Pres_Value$|\\w+\\.Max_Pres_Value$|\\w+\\.Resolution$|\\w+\\.COV_Increment$|\\w+\\.High_Limit$|\\w+\\.Low_Limit$|\\w+\\.Deadband$|\\w+\\.custom.[0-9]+$|\\w+\\.Scale$|\\w+\\.Prescale$"
+		},
+		{
+			"type": 10,
+			"regex": "^(LAV)[0-9]+$|\\w+\\.custom.[0-9]+$"
+		},
+		{
+			"type": 11,
+			"regex": "^(BI|BO|BV|BLO)[0-9]+$|^BO[0-9]+\\.NULL$|\\w+\\.custom.[0-9]+$"
+		},
+		{
+			"type": 12,
+			"regex": "\\w+\\.Out_Of_Service$|\\w+\\.custom.[0-9]+$|\\w+\\.Daylight_Savings_Status$"
+		},
+		{
+			"type": 13,
+			"regex": "^(CSV|DV|TV)[0-9]+$|\\w+\\.custom.[0-9]+$|\\w+\\.Object_Name$|\\w+\\.Description$|\\w+\\.Device_Type$|\\w+\\.Status_Flags$|\\w+\\.Vendor_Name$|\\w+\\.Model_Name$|\\w+\\.Firmware_Revision$|\\w+\\.Application_Software_Version$|\\w+\\.Location$|\\w+\\.Protocol_Service_Supported$|\\w+\\.Protocol_Object_Types_Supported$|\\w+\\.Serial_Number$|\\w+\\.Profile_Name$|\\w+\\.LOCAL_TIME$|\\w+\\.LOCAL_DATE$|\\w+\\.Value_Change_Time$"
+		}
+	],
+	"group_interval": 100,
+	"host": {
+		"name": "Target Device IP Address",
+		"name_zh": "目标设备 IP 地址",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"port": {
+		"name": "Target Device Port",
+		"name_zh": "目标设备端口号",
+		"attribute": "required",
+		"type": "int",
+		"default": 47808,
+		"valid": {
+			"min": 1,
+			"max": 65535
+		}
+	},
+	"device_network": {
+		"name": "Target Device Network",
+		"name_zh": "目标设备网络",
+		"description": "BACnet network number the device is on. Only used when a device MAC is given. Leave at 0 for a device reachable directly at the address above.",
+		"description_zh": "设备所在的 BACnet 网络号，仅在填写了设备 MAC 时生效。设备可通过上面的地址直接访问时保持 0 即可。",
+		"attribute": "optional",
+		"type": "int",
+		"default": 0,
+		"valid": {
+			"min": 0,
+			"max": 65534
+		}
+	},
+	"device_mac": {
+		"name": "Target Device MAC",
+		"name_zh": "目标设备 MAC",
+		"description": "MAC of a device behind a BACnet router, as hex without separators - an MS/TP station is one octet such as 05, a B/IP address six such as C0A80164BAC0. When set, the IP address above must be the router. Leave empty for a device on this network.",
+		"description_zh": "跨 BACnet 网络时，路由器后面那台设备的 MAC，十六进制无分隔符：MS/TP 站号为一字节（如 05），B/IP 地址为六字节（如 C0A80164BAC0）。填写时上面的 IP 地址须填路由器地址。设备在本网络时留空。",
+		"attribute": "optional",
+		"type": "string",
+		"default": "",
+		"valid": {
+			"regex": "/^([0-9a-fA-F]{2}){0,6}$/",
+			"length": 12
+		}
+	}
+}

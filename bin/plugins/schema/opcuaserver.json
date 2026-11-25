@@ -1,0 +1,25 @@
+{
+    "tag_regex": [],
+    "host": {
+        "name": "host",
+        "name_zh": " 主机",
+        "description": "host to run opcua server",
+        "description_zh": "指定运行 OPC UA 服务器的计算机",
+        "attribute": "required",
+        "type": "string",
+        "default": "127.0.0.1"
+    },
+    "port": {
+        "name": "port",
+        "name_zh": "端口号",
+        "description": "bind port in opcua server",
+        "description_zh": "服务器绑定的端口号",
+        "attribute": "required",
+        "type": "int",
+        "default": 4840,
+        "valid": {
+            "min": 1,
+            "max": 65535
+        }
+    }
+}
