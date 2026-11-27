@@ -6,6 +6,7 @@
         "libplugin-azure-iot.so",
         "libplugin-sparkplugb.so",
         "libplugin-websocket.so",
+        "libplugin-cctl.so",
         "libplugin-ekuiper.so",
         "libplugin-gewu.so",
         "libplugin-opcua-server.so",

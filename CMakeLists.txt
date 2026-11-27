@@ -270,6 +270,7 @@ add_subdirectory(plugins/snmp)
 add_subdirectory(plugins/sparkplugb)
 add_subdirectory(plugins/srtp)
 add_subdirectory(plugins/websocket)
+add_subdirectory(plugins/cctl)
 
 add_subdirectory(simulator)
 

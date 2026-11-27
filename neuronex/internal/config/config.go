@@ -24,11 +24,20 @@ type ServiceProxyConfig struct {
 	ReverseProxies []ReverseProxy `json:"reverseProxies"`
 }
 
+type CctlConfig struct {
+	Enabled   bool   `json:"enabled"`
+	Host      string `json:"host"`
+	Port      int    `json:"port"`
+	DeviceID  string `json:"deviceId"`
+	Keepalive int    `json:"keepalive"`
+}
+
 type Config struct {
 	Server  ServerConfig       `json:"server"`
 	Neuron  ServiceProxyConfig `json:"neuron"`
 	Ekuiper ServiceProxyConfig `json:"ekuiper"`
 	Monitor ServiceProxyConfig `json:"monitor"`
+	Cctl    CctlConfig         `json:"cctl"`
 }
 
 func DefaultConfig() *Config {
@@ -38,6 +47,13 @@ func DefaultConfig() *Config {
 			Host:          "0.0.0.0",
 			DisableAuth:   false,
 			DisableKuiper: false,
+		},
+		Cctl: CctlConfig{
+			Enabled:   true,
+			Host:      "127.0.0.1",
+			Port:      18884,
+			DeviceID:  "pump-03",
+			Keepalive: 30,
 		},
 		Neuron: ServiceProxyConfig{
 			ReverseProxies: []ReverseProxy{
@@ -80,6 +96,9 @@ func LoadConfig(path string) (*Config, error) {
 	var inReverseProxies bool
 	var currentProxy *ReverseProxy
 
+	neuronProxiesCleared := false
+	ekuiperProxiesCleared := false
+
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
 		if line == "" || strings.HasPrefix(line, "#") {
@@ -112,9 +131,38 @@ func LoadConfig(path string) (*Config, error) {
 					cfg.Server.DisableKuiper = (v == "true" || v == "1")
 				}
 			}
-		} else if currentSection == "neuron" || currentSection == "ekuiper" {
+		} else if currentSection == "cctl" {
+			parts := strings.SplitN(line, ":", 2)
+			if len(parts) == 2 {
+				k := strings.TrimSpace(parts[0])
+				v := strings.TrimSpace(parts[1])
+				switch k {
+				case "enabled":
+					cfg.Cctl.Enabled = (v == "true" || v == "1")
+				case "host":
+					cfg.Cctl.Host = v
+				case "port":
+					if p, err := strconv.Atoi(v); err == nil {
+						cfg.Cctl.Port = p
+					}
+				case "deviceId", "device_id":
+					cfg.Cctl.DeviceID = v
+				case "keepalive":
+					if ka, err := strconv.Atoi(v); err == nil {
+						cfg.Cctl.Keepalive = ka
+					}
+				}
+			}
+		} else if currentSection == "neuron" || currentSection == "ekuiper" || currentSection == "monitor" {
 			if strings.HasPrefix(line, "reverseProxies:") {
 				inReverseProxies = true
+				if currentSection == "neuron" && !neuronProxiesCleared {
+					cfg.Neuron.ReverseProxies = nil
+					neuronProxiesCleared = true
+				} else if currentSection == "ekuiper" && !ekuiperProxiesCleared {
+					cfg.Ekuiper.ReverseProxies = nil
+					ekuiperProxiesCleared = true
+				}
 				continue
 			}
 			if inReverseProxies {
@@ -133,9 +181,12 @@ func LoadConfig(path string) (*Config, error) {
 						if currentSection == "neuron" {
 							cfg.Neuron.ReverseProxies = append(cfg.Neuron.ReverseProxies, p)
 							currentProxy = &cfg.Neuron.ReverseProxies[len(cfg.Neuron.ReverseProxies)-1]
-						} else {
+						} else if currentSection == "ekuiper" {
 							cfg.Ekuiper.ReverseProxies = append(cfg.Ekuiper.ReverseProxies, p)
 							currentProxy = &cfg.Ekuiper.ReverseProxies[len(cfg.Ekuiper.ReverseProxies)-1]
+						} else if currentSection == "monitor" {
+							cfg.Monitor.ReverseProxies = append(cfg.Monitor.ReverseProxies, p)
+							currentProxy = &cfg.Monitor.ReverseProxies[len(cfg.Monitor.ReverseProxies)-1]
 						}
 					}
 				} else if currentProxy != nil {

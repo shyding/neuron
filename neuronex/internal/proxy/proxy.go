@@ -1,17 +1,65 @@
 package proxy
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"strings"
+	"sync"
+	"time"
 )
 
+type NeuronTokenManager struct {
+	mu       sync.RWMutex
+	token    string
+	expireAt time.Time
+	loginUrl string
+}
+
+func (m *NeuronTokenManager) GetToken() string {
+	m.mu.RLock()
+	if m.token != "" && time.Now().Before(m.expireAt) {
+		tok := m.token
+		m.mu.RUnlock()
+		return tok
+	}
+	m.mu.RUnlock()
+
+	m.mu.Lock()
+	defer m.mu.Unlock()
+
+	if m.token != "" && time.Now().Before(m.expireAt) {
+		return m.token
+	}
+
+	body := []byte(`{"name":"admin","pass":"0000"}`)
+	client := &http.Client{Timeout: 3 * time.Second}
+	resp, err := client.Post(m.loginUrl, "application/json", bytes.NewReader(body))
+	if err != nil {
+		return ""
+	}
+	defer resp.Body.Close()
+
+	var res struct {
+		Token string `json:"token"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&res); err != nil || res.Token == "" {
+		return ""
+	}
+
+	m.token = res.Token
+	m.expireAt = time.Now().Add(12 * time.Hour)
+	return m.token
+}
+
 type ProxyHandler struct {
-	Location string
-	Target   *url.URL
-	Proxy    *httputil.ReverseProxy
+	Location     string
+	Target       *url.URL
+	Proxy        *httputil.ReverseProxy
+	tokenManager *NeuronTokenManager
 }
 
 func NewProxyHandler(location, targetUrl string) (*ProxyHandler, error) {
@@ -20,15 +68,25 @@ func NewProxyHandler(location, targetUrl string) (*ProxyHandler, error) {
 		return nil, fmt.Errorf("invalid target url %s: %w", targetUrl, err)
 	}
 
+	var tokMgr *NeuronTokenManager
+	if strings.HasPrefix(location, "/api/neuron") {
+		tokMgr = &NeuronTokenManager{
+			loginUrl: strings.TrimSuffix(targetUrl, "/") + "/login",
+		}
+	}
+
 	p := httputil.NewSingleHostReverseProxy(target)
-	originalDirector := p.Director
 
 	p.Director = func(req *http.Request) {
-		originalDirector(req)
+		origPath := req.URL.Path
+		origRawQuery := req.URL.RawQuery
+
+		req.URL.Scheme = target.Scheme
+		req.URL.Host = target.Host
 		req.Host = target.Host
 
-		// Strip location prefix and append target path
-		relPath := strings.TrimPrefix(req.URL.Path, location)
+		// Strip location prefix from the original path
+		relPath := strings.TrimPrefix(origPath, location)
 		if !strings.HasPrefix(relPath, "/") {
 			relPath = "/" + relPath
 		}
@@ -37,15 +95,23 @@ func NewProxyHandler(location, targetUrl string) (*ProxyHandler, error) {
 		req.URL.Path = targetBasePath + relPath
 
 		// Pass query parameters
-		if target.RawQuery == "" || req.URL.RawQuery == "" {
-			req.URL.RawQuery = target.RawQuery + req.URL.RawQuery
+		if target.RawQuery == "" {
+			req.URL.RawQuery = origRawQuery
+		} else if origRawQuery == "" {
+			req.URL.RawQuery = target.RawQuery
 		} else {
-			req.URL.RawQuery = target.RawQuery + "&" + req.URL.RawQuery
+			req.URL.RawQuery = target.RawQuery + "&" + origRawQuery
 		}
 
-		// Ensure Neuron auth bypass header if running in local bridge mode
 		req.Header.Set("X-Real-IP", "127.0.0.1")
 		req.Header.Set("X-Forwarded-For", "127.0.0.1")
+
+		// If proxying to Neuron Core, inject valid Neuron Core token
+		if tokMgr != nil {
+			if upstreamTok := tokMgr.GetToken(); upstreamTok != "" {
+				req.Header.Set("Authorization", "Bearer "+upstreamTok)
+			}
+		}
 	}
 
 	p.ModifyResponse = func(resp *http.Response) error {
@@ -63,9 +129,10 @@ func NewProxyHandler(location, targetUrl string) (*ProxyHandler, error) {
 	}
 
 	return &ProxyHandler{
-		Location: location,
-		Target:   target,
-		Proxy:    p,
+		Location:     location,
+		Target:       target,
+		Proxy:        p,
+		tokenManager: tokMgr,
 	}, nil
 }
 

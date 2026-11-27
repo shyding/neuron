@@ -20,6 +20,7 @@ ENTRY_FILES = {
     "bacnet-scan.so": ("bacnet", ["scanning/scan_plugin.c", "bacapp.c", "bacnet.c", "bacnet_point.c", "bacnet_stack.c"]),
     "bacnet.so": ("bacnet", ["bacnet_plugin.c", "bacapp.c", "bacnet.c", "bacnet_point.c", "bacnet_stack.c"]),
     "brother.so": ("brother", ["brother_plugin.c", "brother.c", "brother_stack.c", "brother_tag.c"]),
+    "cctl.so": ("cctl", ["cctl_plugin.c", "cctl_handle.c", "cctl_config.c", "cctl_tcp.c"]),
     "codesys3.so": ("codesys3", ["codesys3_plugin.c", "codesys3.c", "codesys3_point.c", "codesys3_stack.c"]),
     "comli.so": ("comli", ["comli_plugin.c", "comli.c", "comli_point.c"]),
     "df1.so": ("df1", ["df1_plugin.c", "df1.c", "df1_point.c", "df1_req.c", "df1_stack.c"]),

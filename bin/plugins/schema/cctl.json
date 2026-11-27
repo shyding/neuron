@@ -1,0 +1,52 @@
+{
+  "host": {
+    "name": "CCTL Server Host",
+    "name_zh": "CCTL 服务器地址",
+    "description": "CCTL (JetLinks) server IP address or hostname",
+    "description_zh": "CCTL (JetLinks) 物联网中控系统服务IP地址或主机名",
+    "attribute": "required",
+    "type": "string",
+    "default": "127.0.0.1",
+    "valid": {
+      "length": 255
+    }
+  },
+  "port": {
+    "name": "CCTL Gateway Port",
+    "name_zh": "CCTL 网关端口",
+    "description": "CCTL TCP Gateway listening port (default 18884 for official-protocol)",
+    "description_zh": "CCTL TCP 网关监听端口（官方协议默认为 18884）",
+    "attribute": "required",
+    "type": "int",
+    "default": 18884,
+    "valid": {
+      "min": 1,
+      "max": 65535
+    }
+  },
+  "device_id": {
+    "name": "Target Device ID",
+    "name_zh": "目标设备ID",
+    "description": "Default CCTL device ID (e.g. pump-03, th-dc-01)",
+    "description_zh": "CCTL 中控平台的目标设备标识符 (如 pump-03, th-dc-01)",
+    "attribute": "required",
+    "type": "string",
+    "default": "pump-03",
+    "valid": {
+      "length": 128
+    }
+  },
+  "keepalive": {
+    "name": "Keepalive Interval (s)",
+    "name_zh": "心跳保活间隔(秒)",
+    "description": "Interval in seconds to send heartbeat packet to keep device online",
+    "description_zh": "维持设备中控在线状态的心跳上报间隔时间",
+    "attribute": "optional",
+    "type": "int",
+    "default": 30,
+    "valid": {
+      "min": 5,
+      "max": 3600
+    }
+  }
+}

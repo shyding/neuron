@@ -21,3 +21,10 @@ log.html
 output.xml
 report.html
 *.cache
+scratch/
+*.zip
+core.*
+neuronex/bin/
+neuronex/neuronex
+neuronex/neuronex.exe
+bin/neuronex-licgen
