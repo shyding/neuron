@@ -1,18 +1,11 @@
 @echo off
 chcp 65001 >nul
-echo ======================================================
-echo          一键停止所有服务 (10502 / 7000 / 8085 / 8088)
-echo ======================================================
-echo 正在停止 Windows 8088 原生服务...
+echo 正在停止所有环境服务组件...
+echo 1. 停止 8088 原生服务...
 taskkill /F /IM neuronex.exe 2>nul
-
-echo 正在停止 WSL 7000 / 8085 服务...
-wsl -d Ubuntu -e bash -c "killall -9 neuron neuronex 2>/dev/null || true"
-
-echo 正在停止 10502 Modbus 仿真器...
+echo 2. 停止 10502 Modbus 仿真器...
 powershell -Command "Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*modbus_sim.py*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }" 2>nul
-
-echo ======================================================
-echo 所有环境服务已停止。
-echo ======================================================
-pause
+echo 3. 停止 8085 / 7000 WSL 服务...
+wsl.exe -d Ubuntu bash -c "pkill -9 neuron 2>/dev/null; pkill -9 neuronex 2>/dev/null; true"
+echo 所有组件已停止。
+timeout /t 2 >nul

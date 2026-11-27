@@ -58,8 +58,10 @@ def get_cctl_devices_status():
 
 def start_7000():
     print("[7000] 正在启动 WSL Neuron C Core (端口 7000)...")
-    cmd = 'wsl -d Ubuntu -e bash -c "cd /opt/neuronex-4.0.2 && nohup ./bin/neuron > /tmp/neuron.log 2>&1 &"'
-    subprocess.Popen(cmd, shell=True)
+    if os.name == 'nt':
+        subprocess.Popen(['wsl.exe', '-d', 'Ubuntu', 'bash', '-c', 'cd /opt/neuronex-4.0.2 && ./bin/neuron'], creationflags=subprocess.CREATE_NEW_CONSOLE)
+    else:
+        subprocess.Popen(['/opt/neuronex-4.0.2/bin/neuron'])
     time.sleep(2)
     if check_port(7000):
         print("  -> 7000 端口已就绪 (RUNNING)")
@@ -68,15 +70,17 @@ def start_7000():
 
 def stop_7000():
     print("[7000] 正在停止 WSL Neuron C Core...")
-    cmd = 'wsl -d Ubuntu -e bash -c "killall -9 neuron 2>/dev/null || true"'
+    cmd = 'wsl -d Ubuntu -e bash -c "pkill -9 neuron 2>/dev/null || true"'
     subprocess.run(cmd, shell=True)
     time.sleep(1)
     print("  -> 已发送停止指令")
 
 def start_8085():
     print("[8085] 正在启动 WSL 官方 NeuronEX (端口 8085)...")
-    cmd = 'wsl -d Ubuntu -e bash -c "cd /opt/neuronex-4.0.2 && nohup ./bin/neuronex alone > /tmp/neuronex.log 2>&1 &"'
-    subprocess.Popen(cmd, shell=True)
+    if os.name == 'nt':
+        subprocess.Popen(['wsl.exe', '-d', 'Ubuntu', 'bash', '-c', 'cd /opt/neuronex-4.0.2 && ./bin/neuronex alone'], creationflags=subprocess.CREATE_NEW_CONSOLE)
+    else:
+        subprocess.Popen(['/opt/neuronex-4.0.2/bin/neuronex', 'alone'])
     time.sleep(2)
     if check_port(8085):
         print("  -> 8085 端口已就绪 (RUNNING)")
@@ -85,7 +89,7 @@ def start_8085():
 
 def stop_8085():
     print("[8085] 正在停止 WSL 官方 NeuronEX...")
-    cmd = 'wsl -d Ubuntu -e bash -c "killall -9 neuronex 2>/dev/null || true"'
+    cmd = 'wsl -d Ubuntu -e bash -c "pkill -9 neuronex 2>/dev/null || true"'
     subprocess.run(cmd, shell=True)
     time.sleep(1)
     print("  -> 已发送停止指令")
